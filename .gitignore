@@ -1,0 +1,21 @@
+# Compiled
+*.elc
+
+# Packaging
+.cask
+
+# Backup files
+*~
+
+# Undo-tree save-files
+*.~undo-tree
+
+# IDO history (may contain personal info)
+ido.last
+
+# eshell history (may contain personal info)
+eshell/history
+eshell/lastdir
+
+# Packages
+elpa/
