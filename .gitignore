@@ -17,5 +17,8 @@ ido.last
 eshell/history
 eshell/lastdir
 
+# network data
+network-security.data
+
 # Packages
 elpa/

@@ -18,10 +18,16 @@ The return value is the new value of LIST-VAR."
 
 ;;package archives------------------------------------------
 (require 'package)
-(my/append-to-list 'package-archives
-		   '(("melpa" . "https://melpa.org/packages/")))
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+        ("marmalade" . "http://marmalade-repo.org/packages/")
+        ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 ;;----------------------------------------------------------
+
+;;Make sure we get the correct environment variables---------
+(exec-path-from-shell-initialize)
+;;-----------------------------------------------------------
 
 ;;JS mode---------------------------------------------------
 (require 'js)
@@ -35,11 +41,9 @@ The return value is the new value of LIST-VAR."
 ;;----------------------------------------------------------
 
 ;;Wakatime--------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/elpa/wakatime-mode-20161019.602/")
 (require 'wakatime-mode)
-(load-library "wakatime-mode")
 (setq wakatime-api-key (getenv "WAKATIME_KEY"))
-(setq wakatime-cli-path "/usr/local/bin/wakatime")
+(setq wakatime-cli-path "/usr/bin/wakatime")
 (global-wakatime-mode)
 ;;----------------------------------------------------------
 
@@ -61,8 +65,8 @@ The return value is the new value of LIST-VAR."
 ;;----------------------------------------------------------
 
 ;;misc editing stuff----------------------------------------
-(setq tab-width 2)
-(setq indent-tabs-mode nil)
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (turn-on-font-lock)
 (column-number-mode)
