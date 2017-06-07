@@ -32,14 +32,19 @@ The return value is the new value of LIST-VAR."
 ;;JS mode---------------------------------------------------
 (require 'js)
 (setq js-indent-level 2)
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode))
 ;;----------------------------------------------------------
 
+;;TypeScript------------------------------------------------
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+;;----------------------------------------------------------
 
 ;;Python mode-----------------------------------------------
 (require 'python)
 (setq-default python-indent-offset 2)
 ;;----------------------------------------------------------
 
+ 
 ;;Wakatime--------------------------------------------------
 (require 'wakatime-mode)
 (setq wakatime-api-key (getenv "WAKATIME_KEY"))
@@ -101,4 +106,5 @@ The return value is the new value of LIST-VAR."
     (when (and eslint (file-executable-p eslint))
       (setq-local flycheck-javascript-eslint-executable eslint))))
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 ;;----------------------------------------------------------
