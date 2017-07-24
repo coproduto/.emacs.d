@@ -26,5 +26,8 @@ cider-history
 # network data
 network-security.data
 
+# Projectile
+projectile-bookmarks.eld
+
 # Packages
 elpa/
