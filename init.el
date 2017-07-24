@@ -62,19 +62,19 @@ The return value is the new value of LIST-VAR."
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
-(add-hook 'emacs-lisp-mode-hook       'rainbow-delimiters-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook 'rainbow-delimiters-mode)
-(add-hook 'ielm-mode-hook             'rainbow-delimiters-mode)
-(add-hook 'lisp-mode-hook             'rainbow-delimiters-mode)
-(add-hook 'lisp-interaction-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'scheme-mode-hook           'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook       #'rainbow-delimiters-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'rainbow-delimiters-mode)
+(add-hook 'ielm-mode-hook             #'rainbow-delimiters-mode)
+(add-hook 'lisp-mode-hook             #'rainbow-delimiters-mode)
+(add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'scheme-mode-hook           #'rainbow-delimiters-mode)
 ;;-------------------------------------------------------------
 
 ;;JS mode/HTML mode---------------------------------------------------
 (require 'js)
 (setq js-indent-level 2)
-(add-hook 'js-mode-hook 'subword-mode)
-(add-hook 'js-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'js-mode-hook #'subword-mode)
+(add-hook 'js-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'html-mode-hook 'subword-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode))
 (eval-after-load "sgml-mode"
@@ -85,7 +85,7 @@ The return value is the new value of LIST-VAR."
 ;;----------------------------------------------------------
 
 ;;TypeScript------------------------------------------------
-(add-hook 'typescript-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'typescript-mode-hook #'rainbow-delimiters-mode)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 ;;----------------------------------------------------------
 
@@ -96,9 +96,9 @@ The return value is the new value of LIST-VAR."
 ;;Clojure---------------------------------------------------
 (require 'cider-mode)
 
-(add-hook 'clojure-mode-hook 'enable-paredit-mode)
-(add-hook 'clojure-mode-hook 'subword-mode)
-(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'clojure-mode-hook #'enable-paredit-mode)
+(add-hook 'clojure-mode-hook #'subword-mode)
+(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook
           (lambda ()
             (setq inferior-lisp-program "lein repl")
@@ -184,12 +184,22 @@ The return value is the new value of LIST-VAR."
 (put 'narrow-to-region 'disabled nil)
 ;;----------------------------------------------------------
 
-;;GUI-------------------------------------------------------
-(add-to-list 'default-frame-alist '(foreground-color . "#D7CEE0"))
-(add-to-list 'default-frame-alist '(background-color . "#090909"))
+;;UI-------------------------------------------------------
+(menu-bar-mode -1)
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+
+(blink-cursor-mode 0)
+(setq ring-bell-function 'ignore)
 (when (display-graphic-p)
   (load "font-support.el")
   (set-face-attribute 'default nil :height 110))
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'load-path "~/.emacs.d/themes")
+(load-theme 'tomorrow-night-eighties t)
 ;;----------------------------------------------------------
 
 ;;Flycheck--------------------------------------------------
