@@ -17,6 +17,12 @@ ido.last
 eshell/history
 eshell/lastdir
 
+# CIDER history (may contain personal info)
+cider-history
+
+# SMEX saved data
+.smex-items
+
 # network data
 network-security.data
 
