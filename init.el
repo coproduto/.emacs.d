@@ -58,9 +58,9 @@ The return value is the new value of LIST-VAR."
 
 ;; eldoc-mode shows documentation in the minibuffer when writing code
 ;; http://www.emacswiki.org/emacs/ElDoc
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+(add-hook 'ielm-mode-hook 'eldoc-mode)
 
 (add-hook 'emacs-lisp-mode-hook       #'rainbow-delimiters-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'rainbow-delimiters-mode)
@@ -94,24 +94,28 @@ The return value is the new value of LIST-VAR."
 ;;----------------------------------------------------------
 
 ;;Clojure---------------------------------------------------
+(require 'clojure-mode)
+(require 'clojure-mode-extra-font-locking)
 (require 'cider-mode)
 
-(add-hook 'clojure-mode-hook #'enable-paredit-mode)
-(add-hook 'clojure-mode-hook #'subword-mode)
-(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'clojure-mode-hook
-          (lambda ()
-            (setq inferior-lisp-program "lein repl")
-            (font-lock-add-keywords
-             nil
-             '(("(\\facts?\\)"
-                (1 font-lock-keyword-face))
-               ("(\\background?\\)"
-                (1 font-lock-keyword-face))))
-            (define-clojure-indent (fact 1))
-            (define-clojure-indent (facts 1))))
 
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'clojure-mode-hook 'enable-paredit-mode)
+(add-hook 'clojure-mode-hook 'subword-mode)
+(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+;; (add-hook 'clojure-mode-hook
+;;           (lambda ()
+;;             (setq inferior-lisp-program "lein repl")
+;;             (font-lock-add-keywords
+;;              nil
+;;              '(("(\\facts?\\)"
+;;                 (1 font-lock-keyword-face))
+;;                ("(\\background?\\)"
+;;                 (1 font-lock-keyword-face))))
+;;             (define-clojure-indent (fact 1))
+;;             (define-clojure-indent (facts 1))))
+
+(require 'cider-eldoc)
+(add-hook 'cider-mode-hook 'eldoc-mode)
 (setq cider-repl-pop-to-buffer-on-connect t)
 (setq cider-show-error-buffer t)
 (setq cider-auto-select-error-buffer t)

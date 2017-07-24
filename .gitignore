@@ -23,6 +23,9 @@ cider-history
 # SMEX saved data
 .smex-items
 
+# Recent files
+recentf
+
 # network data
 network-security.data
 
