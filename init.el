@@ -72,6 +72,7 @@ The return value is the new value of LIST-VAR."
 
 ;;JS mode/HTML mode---------------------------------------------------
 (require 'js)
+(require 'css-mode)
 (setq js-indent-level 2)
 (add-hook 'js-mode-hook #'subword-mode)
 (add-hook 'js-mode-hook #'rainbow-delimiters-mode)
@@ -87,6 +88,7 @@ The return value is the new value of LIST-VAR."
 ;;TypeScript------------------------------------------------
 (add-hook 'typescript-mode-hook #'rainbow-delimiters-mode)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+(setq-default typescript-indent-level 2)
 ;;----------------------------------------------------------
 
 ;;Python mode-----------------------------------------------
